@@ -1,6 +1,6 @@
 # Unidad 1
 
-## 🔎 PROFE CHUPEME EL PENE BIEN SABROSO
+## 🔎 Fase: Set + Seek
 
 ### Actividad 01
 
