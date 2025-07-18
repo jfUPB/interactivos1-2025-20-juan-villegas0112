@@ -17,6 +17,6 @@ Entendiendo bien como funciona la interacion usuario objeto, para saber que expe
 Luego de este ejercicio, define en tus propias palabras
 
 ¿Qué es el diseño/arte generativo?
-Arte generado en tiempo real 
+Arte generado en tiempo real, con la utilizacion de un sistema que cumple u conjunto de reglas creadas por un artista. Esta practica contien un cierto nivel de eleatoriedad. Aunuqe el arte generativo tiene un fin y el diseño generativo pretende mostrar algo en especifico, ambas contienen casi la misma estructura.  
 ¿Cómo podrías aplicar lo que has visto en tu perfil profesional?
-Me intera mucho la generacion de imagenes para conciertos, pues le permite vivir una experiecia unica al usuario que este viviendo el concierto o la exposicion artistica en la que se encuentre.
+Me intera mucho la generacion de imagenes para conciertos, pues le permite vivir una experiecia unica al usuario que este viviendo el concierto o la exposicion artistica en la que se encuentre. Ademas la posibilidad de creacion de diseños para cualquier tipo de actividades y que sean no solo imagenes sino experiencias que pueden a llegar a ser unicas para cada usuario es algo que es demasiado innovador e importante para la creacion de productos y espacios interactivos.
