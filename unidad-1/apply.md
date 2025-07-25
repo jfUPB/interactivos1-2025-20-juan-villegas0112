@@ -31,7 +31,8 @@ Verde: si no se presiona ('N')
 ### Actividad 06
 
 #### p5.js
-```
+
+``` js
 let port;
 let connectBtn;
 let connectionInitialized = false;
@@ -93,7 +94,10 @@ function connectBtnClick() {
 ```
 
 #### micro:bit
-```
+
+
+``` py
+
 while True:
 
     if button_a.is_pressed():
