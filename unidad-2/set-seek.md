@@ -177,6 +177,7 @@ Pasos para el codigo
   
         3.cambiar el currentState para dar con el siguiente estado
 - Terminar con un else que me de una imagen diferente para saber si hay algun error en mi codigo
+- Para el cambio con uso de botones usar if en el elif y  ```button_a.was_pressed():``` 
 
 
 
