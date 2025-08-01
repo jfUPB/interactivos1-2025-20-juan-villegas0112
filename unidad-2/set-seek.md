@@ -137,7 +137,7 @@ Esperar un tiempo determinado.
 
 Cambiar de estado al siguiente y reiniciar el temporizador.
 
-### 🚜Actividad 02🚜
+### 🚜Actividad 03🚜
 
 ***Diagrama de Maquinas de Estado (UML)***
 
