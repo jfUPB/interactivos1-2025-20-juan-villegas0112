@@ -137,5 +137,109 @@ Esperar un tiempo determinado.
 
 Cambiar de estado al siguiente y reiniciar el temporizador.
 
+### 🚜Actividad 02🚜
 
+***Diagrama de Maquinas de Estado (UML)***
+
+Usar draw.io para hacer futuros diagramas.
+
+*Circulo negro*: Pseudo estado inicial
+
+*Cuadros amarillos*: Son los estados, los cuales son condiciones de espera.
+
+*Cuadros grises*:
+- eventos Rojo y termina en /
+  
+- acciones
+  
+*Flechas*: transiciones 
+
+*Vector de prueba*: es una ruta en el diagrama, es darle un tiempo o una organizacion al codigo para que el sistema cumpla adecuadaemente con lo que se requiere. El verctor de prueba permite encontrar errores y hacer las cosas confirmando y corroborando la funcionalidad del codigo. -------> Para definir un vector de prueba debes llevar al sistema a un estado, generar los eventos y observar el estado siguiente y las acciones que ocurrirán. Por tanto, un vector de prueba tiene unas condiciones iniciales del sistema, unos resultados esperados y los resultados realmente obtenidos. Si el resultado obtenido es igual al esperado entonces el sistema pasó el vector de prueba, de lo contrario el sistema puede tener un error.
+
+<img width="721" height="682" alt="image" src="https://github.com/user-attachments/assets/ae1ed00d-3667-46ff-aaf7-8ada8b8ae74c" />
+
+
+Pasos para el codigo
+(Cada linea de codigo es un frame)
+- Definir tarea
+- Generar el ciclo usando la tarea ``` while true:```
+- Darle nombres descriptivos a los estados
+- Darles un valor a estos estados. Ej: STATE_HAPPY = 1
+- Generar un currentState para el estado inicial y hacerla global dentro de la tarea.
+- Crear los si no si de cada estado; usar los ``` if else if``` para generar condiciones en el uso de cada estado.
+- En estos else if usar el currentstate para cambiar los estados ```currentState = STATE_HAPPY```
+- Definir los intervalos de cada estado (tambien el starttime = 0)
+- para la espera del tiempo en los condicionales se debe usar ```if utime.ticks_diff(utime.ticks_ms(), start_time) > interval:```
+- Pasos if else if:
+                1.Mostrar imagenes
+  
+            2.Preguntar por el starttime para saber en que tiempo esat ubicado el codigo:````start_time = utime.ticks_ms()``
+  
+        3.cambiar el currentState para dar con el siguiente estado
+- Terminar con un else que me de una imagen diferente para saber si hay algun error en mi codigo
+
+
+
+``` py
+from microbit import *
+import utime
+
+STATE_INIT = 0
+STATE_HAPPY = 1
+STATE_SMILE = 2
+STATE_SAD = 3
+
+HAPPY_INTERVAL = 1500
+SMILE_INTERVAL = 1000
+SAD_INTERVAL = 2000
+
+current_state = STATE_INIT
+start_time = 0
+interval = 0
+
+while True:
+    # pseudoestado STATE_INIT
+    if current_state == STATE_INIT:
+        display.show(Image.HAPPY)
+        start_time = utime.ticks_ms()
+        interval = HAPPY_INTERVAL
+        current_state = STATE_HAPPY
+    elif current_state == STATE_HAPPY:
+        if button_a.was_pressed():
+            # Acciones para el evento
+            display.show(Image.SAD)
+            # Acciones de entrada para el siguiente estado
+            start_time = utime.ticks_ms()
+            interval = SAD_INTERVAL
+            current_state = STATE_SAD
+        if utime.ticks_diff(utime.ticks_ms(), start_time) > interval:
+            # Acciones para el evento
+            display.show(Image.SMILE)
+            # Acciones de entrada para el siguiente estado
+            start_time = utime.ticks_ms()
+            interval = SMILE_INTERVAL
+            current_state = STATE_SMILE
+    elif current_state == STATE_SMILE:
+        if button_a.was_pressed():
+            display.show(Image.HAPPY)
+            start_time = utime.ticks_ms()
+            interval = HAPPY_INTERVAL
+            current_state = STATE_HAPPY
+        if utime.ticks_diff(utime.ticks_ms(), start_time) > interval:
+            display.show(Image.SAD)
+            start_time = utime.ticks_ms()
+            interval = SAD_INTERVAL
+           current_state = STATE_SAD
+    elif current_state == STATE_SAD:
+        if button_a.was_pressed():
+            display.show(Image.SMILE)
+            start_time = utime.ticks_ms()
+            interval = SMILE_INTERVAL
+            current_state = STATE_SMILE
+        if utime.ticks_diff(utime.ticks_ms(), start_time) > interval:
+            display.show(Image.HAPPY)
+            start_time = utime.ticks_ms()
+            interval = HAPPY_INTERVAL
+            current_state = STATE_HAPPY
+```
 
