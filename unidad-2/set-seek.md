@@ -243,4 +243,50 @@ while True:
             interval = HAPPY_INTERVAL
             current_state = STATE_HAPPY
 ```
+1. Explica por qué decimos que este programa permite realizar de manera concurrente varias tareas.
+
+Este programa ejecuta simultaneamente difernetes tareas aunque el codigo , tenga un orden y esto es gracias a:
+
+- Evaluación continua de eventos como la presión del botón A (button_a.was_pressed()).
+
+- Control del tiempo mediante temporizadores (utime.ticks_ms() y utime.ticks_diff()).
+
+- Cambio de estados en función del tiempo y de eventos, sin detener el flujo del programa.
+
+2. Identifica los estados, eventos y acciones en el programa.
+
+ 🧭 Estados:
+   - STATE_INIT: Estado inicial.
+
+   - STATE_HAPPY: Cara feliz.
+
+   - STATE_SMILE: Cara sonriente.
+
+   - STATE_SAD: Cara triste.
+
+ ⚡ Eventos:
+   - Presión del botón A (button_a.was_pressed()).
+
+   - Paso del tiempo (utime.ticks_diff(utime.ticks_ms(), start_time) > interval:).
+
+ 🛠 Acciones:
+   - Mostrar una imagen diferente (display.show(Image.SMILE)).
+
+   - Reiniciar el temporizador (start_time = utime.ticks_ms()).
+
+   - Cambiar el intervalo de espera según el estado (interval = SMILE_INTERVAL).
+
+   - Cambiar el estado actual (current_state = STATE_SMILE).
+
+3. Describe y aplica al menos 3 vectores de prueba para el programa.
+
+- WAITINHAPPY -----> Esperar 1.5 segundos (sin presionar botón) -----> Acción esperada: Mostrar carita SMILE -----> WAITINSMILE
+
+- WAITINSMILE -----> Presionar botón A -----> Mostrar carita HAPPY-----> WAITINHAPPY
+
+- WAITINSAD ----->Presionar botón A -----> Mostrar carita SMILE -----> WAITINSMILE
+  
+
+
+
 
