@@ -7,7 +7,8 @@
 
 Diseño de la lógica de una bomba temporizada
 
-<img width="865" height="833" alt="image" src="https://github.com/user-attachments/assets/f550e0a9-3dcd-48a8-97bf-468e553a137d" />
+<img width="637" height="680" alt="image" src="https://github.com/user-attachments/assets/81af2160-66f8-4b6b-a457-54d9018ac029" />
+
 
 
 ### 🧨Actividad 05🧨
@@ -16,62 +17,68 @@ Diseño de la lógica de una bomba temporizada
 from microbit import *
 import utime
 
-# Definimos los estados de la bomba
-STATE_DESARMADA = 0  # modo configuración
-STATE_ARMADA = 1     # cuenta regresiva
-STATE_EXPLOTADA = 2  # bomba explotó
+STATE_BOMB_DESARMADA = 0
+STATE_BOMB_ARMADA = 1
+STATE_BOMB_EXPLOTA = 2
 
-# Variables para tiempo
-tiempo = 20  # tiempo inicial en segundos
-min_tiempo = 10
-max_tiempo = 60
-
-current_state = STATE_DESARMADA
+current_STATE = STATE_BOMB_DESARMADA
 start_time = 0
 
+tiempo_normal = 20000
+tiempo_min = 10000
+tiempo_max = 60000
+
+pin_touch = pin_logo
+
+esperando_activar_bomba = False
+momento_shake = 0
+
 while True:
-    if current_state == STATE_DESARMADA:
-        # Mostrar tiempo actual en pantalla (como número)
-        display.show(str(tiempo))
-        
-        # Ajustar tiempo con botones
-        if button_a.was_pressed():
-            if tiempo < max_tiempo:
-                tiempo += 1
-        if button_b.was_pressed():
-            if tiempo > min_tiempo:
-                tiempo -= 1
-        
-        # Si hago shake, armo la bomba
-        if accelerometer.was_gesture("shake"):
-            current_state = STATE_ARMADA
-            start_time = utime.ticks_ms()
-    
-    elif current_state == STATE_ARMADA:
-        # Calcular tiempo que ha pasado en milisegundos
-        elapsed_ms = utime.ticks_diff(utime.ticks_ms(), start_time)
-        tiempo_restante = tiempo - elapsed_ms // 1000  # pasar a segundos
-        
-        # Mostrar el tiempo restante
-        if tiempo_restante >= 0:
-            display.show(str(tiempo_restante))
+    if current_STATE == STATE_BOMB_DESARMADA:
+        if esperando_activar_bomba:
+            display.show(Image.YES)
+            if utime.ticks_diff(utime.ticks_ms(), momento_shake) >= 2000:
+                current_STATE = STATE_BOMB_ARMADA
+                start_time = utime.ticks_ms()
+                esperando_activar_bomba = False
         else:
-            # Tiempo llegó a 0, bomba explota
-            current_state = STATE_EXPLOTADA
-            display.show(Image.SKULL)  # imagen de explosión (simulada)
-            # Activar el buzzer o sonido (si tienes uno conectado)
-            # Aquí solo parpadeamos la pantalla rápido
-            for _ in range(10):
-                display.show(Image.SKULL)
-                sleep(200)
-                display.clear()
-                sleep(200)
-    
-    elif current_state == STATE_EXPLOTADA:
-        # Esperar a que toque el botón touch para reiniciar
+            display.show(str(tiempo_normal // 1000))
+
+            if button_a.was_pressed():
+                if tiempo_normal < tiempo_max:
+                    tiempo_normal += 1000
+
+            if button_b.was_pressed():
+                if tiempo_normal > tiempo_min:
+                    tiempo_normal -= 1000
+
+            if accelerometer.was_gesture("shake"):
+                esperando_activar_bomba = True
+                momento_shake = utime.ticks_ms()
+
+    elif current_STATE == STATE_BOMB_ARMADA:
+        elapsed_ms = utime.ticks_diff(utime.ticks_ms(), start_time)
+        tiempo_restante = tiempo_normal - elapsed_ms
+
+        if tiempo_restante >= 0:
+            display.show(str(tiempo_restante // 1000))
+        else:
+            current_STATE = STATE_BOMB_EXPLOTA
+            display.show(Image.SKULL)
+
+    elif current_STATE == STATE_BOMB_EXPLOTA:
         if pin_touch.is_touched():
-            tiempo = 20  # reiniciar tiempo a 20 segundos
-            current_state = STATE_DESARMADA
-            display.show(str(tiempo))
+            tiempo_normal = 20000
+            current_STATE = STATE_BOMB_DESARMADA
+            display.show(str(tiempo_normal // 1000))
 
 ```
+
+***Vectores de Prueba*** 
+- Cuando se inica debe de salir los numeros de tiempo 
+- Cuando se presione a o b debe mostrar el numero nuevo
+- Cuando se haga el sake debe salir la imagen del check
+- Luego del check debe salir el conteo regresivo con los numeros en pantalla
+- Cuando llegue a 0 debe salir la imagen de skull
+- Cuando se presione el toiuch volver a iniciar 
+
