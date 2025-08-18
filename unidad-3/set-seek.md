@@ -2,60 +2,23 @@
 
 ## 🔎 Fase: Set + Seek
 
-### Actividad 01
+### Actividad 05
+1. Construye el modelo de la bomba 3.0. Como ya tienes el código puedes tener un modelo muy preciso.
 
-``` py
-from microbit import *
-import utime
+<img width="720" height="677" alt="image" src="https://github.com/user-attachments/assets/f9286a06-6bef-49c8-a05e-4908be996e62" />
 
-class Semaforo:
-    def __init__(self,tr,ta,tv,col):
-        self.tr = tr
-        self.ta = ta
-        self.tv = tv
-        self.col = col
-        self.startTime = utime.ticks_ms()
-        display.set_pixel(self.col,0,9)
-        self.STATE = "WAITINRED"
+2. Crear una tabla con los vectores de prueba. La tabla debe tener 4 columnas por vector y puedes agrupar vectores en un gran vector. Las columnas son:
+    - Estado inicial
+    - Evento disparador
+    - Acciones
+    - Estado final
 
-    def update(self):
-        if self.STATE == "WAITINRED":
-           if utime.ticks_diff(utime.ticks_ms(),self.startTime) >= self.tr:
+<img width="466" height="160" alt="image" src="https://github.com/user-attachments/assets/a4319f47-11a9-4296-91f5-5ba74827bc65" />
 
-               display.set_pixel(self.col,0,0)
-               display.set_pixel(self.col,1,9)
-               self.startTime = utime.ticks_ms()
-               self.STATE == "WAITINYELLOW"
 
-        elif self.STATE == "WAITINYELLOW":
-            if utime.ticks_diff(utime.ticks_ms(),self.startTime) >= self.ta:
 
-               display.set_pixel(self.col,1,0)
-               display.set_pixel(self.col,2,9)
-               self.startTime = utime.ticks_ms()
-               self.STATE == "WAITINGREEN"
 
-        elif self.STATE == "WAITINGREEN":
-            if utime.ticks_diff(utime.ticks_ms(),self.startTime) >= self.tv:
 
-               display.set_pixel(self.col,2,0)
-               display.set_pixel(self.col,0,9)
-               self.startTime = utime.ticks_ms()
-               self.STATE == "WAITINRED"
-    
-    
-    
 
-semaforo1 = Semaforo(5000, 2000, 3000, 0)
-semaforo2 = Semaforo(3000, 1000, 2000, 2)
-semaforo3 = Semaforo(4000, 3000, 2000, 4)
-
-while True:
-    semaforo1.update()
-    semaforo2.update()
-    semaforo3.update()
-
-```
-### Actividad 02
 
 
