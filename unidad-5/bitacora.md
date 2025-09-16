@@ -116,15 +116,62 @@ data = struct.pack('>2h2B', xValue, yValue, int(aState), int(bState))
 | aState | 0        |
 | bState | 0        |
 
-## Actividad 02
+## Actividad 03
 
 🧐🧪✍️ Explica por qué en la unidad anterior teníamos que enviar la información delimitada y además marcada con un salto de línea y ahora no es necesario.
 
 Porque cuan hay un tamaño fijo de bytes no se necesita un separador, ademas es mas eficiente y no hace un cambio a un lenguaje legible sino que solo lo envia tal y como lo recibe.
 
+🧐🧪✍️ Compara el código de la unidad anterior relacionado con la recepción de los datos seriales que ves ahora. ¿Qué cambios observas?
 
+hay un error a la hora de la lectura del puerto serial, esto es porque hay que agregarle una biblioteca que haga que funcione y sea dectectado un puerto serial nuevo.
 
+🧐🧪✍️ ¿Qué ves en la consola? 
 
+Mensajes de datos de microBitX y microBitY que tienen valores bastante grandes, por ejemplo:
 
+microBitX: 11574 microBitY: 13880
 
+microBitX: 29541 microBitY: 11334
+
+Algunos valores llegan hasta ~29541, lo que es mucho más grande que la pantalla.
+
+También se ve que los estados de botones A y B (microBitAState y microBitBState) son siempre false, lo que indica que no hay eventos de botón.
+
+¿Por qué crees que se produce este error?
+
+Valores de microBitX y microBitY demasiado altos para ser coordenadas de pantalla.
+
+El código asume que el micro:bit envía valores int16 (dos bytes) para X e Y que representen directamente posiciones en la pantalla o valores pequeños (por ejemplo, entre -1024 y 1024 o 0 y ancho/alto).
+
+Pero los valores como 29541 no caben en un int16 (que va de -32768 a 32767), pero están muy cerca del límite alto, lo que puede indicar:
+
+El micro:bit envía datos en un formato distinto: Quizá los datos no vienen en el orden o formato que espera el sketch.
+
+🧐🧪✍️ Analiza el código, observa los cambios. Ejecuta y luego observa la consola. ¿Qué ves?
+
+<img width="815" height="150" alt="image" src="https://github.com/user-attachments/assets/bdf03b8f-09df-43d1-9161-bd43d2b404ef" />
+<img width="713" height="542" alt="image" src="https://github.com/user-attachments/assets/50a5e603-7231-4f7a-85c2-a0a325128325" />
+
+El protocolo de comunicación está funcionando correctamente: se reciben los valores correctos de x, y, y estados de botones.
+
+No detecta correctamente la pulsación de botón A, porque siempre esta dibujando.
+
+🧐🧪✍️ ¿Qué cambios tienen los programas?  
+
+El micro:bit ahora envía datos reales del acelerómetro y botones, no valores fijos.
+
+El p5.js ajusta las coordenadas para centrar y dibujar basándose en los movimientos físicos.
+
+En la consola p5.js verás valores variables y eventos según el input físico.
+
+La interacción es mucho más dinámica y refleja el estado real del dispositivo.
+
+¿Qué puedes observar en la consola del editor de p5.js?
+
+El programa está funcionando bien: detecta eventos, recibe datos y dibuja.
+
+Hay algunos paquetes corruptos (checksum error).
+
+Segun chatgpt esto es común en comunicación serial y se soluciona con mejor sincronización y manejo del buffer.
 
