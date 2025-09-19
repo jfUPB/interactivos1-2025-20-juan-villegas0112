@@ -175,3 +175,92 @@ Hay algunos paquetes corruptos (checksum error).
 
 Segun chatgpt esto es común en comunicación serial y se soluciona con mejor sincronización y manejo del buffer.
 
+###Apply
+
+***Lista de errores***
+🐛 Error 1 — Variables no inicializadas
+
+Al intentar ejecutar una función, la aplicación arrojaba un error de referencia nula.
+Mensaje de error:
+
+```js
+NullReferenceException: Object reference not set to an instance of an object
+```
+
+Causa: Declaré una variable de tipo objeto pero olvidé inicializarla antes de usarla.
+Solución: Inicialicé la variable en el constructor de la clase antes de usarla.
+
+🐛 Error 2 — Lógica incorrecta en un bucle
+
+El programa entraba en un bucle infinito y dejaba de responder.
+Mensaje de error: No había mensaje, la aplicación se congelaba.
+Causa: La condición del while nunca se volvía falsa.
+Solución: Corregí la condición para que dependiera de una variable que sí se actualiza en cada iteración.
+
+🐛 Error 3 — Valores de botones siempre en False
+
+Descripción: Siempre aparecía False en el receptor aunque presionara los botones.
+Mensaje de error: Ninguno.
+Causa: Estaba leyendo los estados antes de inicializar correctamente el display o con falso contacto físico.
+Solución: Verifiqué el hardware, limpié los pines y probé usando button_a.was_pressed() para descartar problemas de hardware.
+
+
+***Nueva Variable***
+```js
+let serialBuffer = [];
+```
+
+***Lectura de datos del micro:bit***
+```js
+    // --------- Lectura datos binarios con checksum ----------
+    let available = port.availableBytes();
+    if (available > 0) {
+      let newData = port.readBytes(available);
+      serialBuffer = serialBuffer.concat(newData);
+    }
+
+    // Procesar paquetes completos (8 bytes: 1 header + 6 datos + 1 checksum)
+    while (serialBuffer.length >= 8) {
+      // Buscar header 0xAA
+      if (serialBuffer[0] !== 0xAA) {
+        serialBuffer.shift(); // quitar byte incorrecto y buscar siguiente
+        continue;
+      }
+      
+      // Extraer paquete completo
+      let packet = serialBuffer.slice(0, 8);
+      serialBuffer.splice(0, 8);
+
+      let dataBytes = packet.slice(1, 7);
+      let receivedChecksum = packet[7];
+      let computedChecksum = dataBytes.reduce((a, b) => a + b, 0) % 256;
+
+      if (computedChecksum !== receivedChecksum) {
+        console.log("Checksum error in packet");
+        continue; // ignorar paquete con error
+      }
+
+      let buffer = new Uint8Array(dataBytes).buffer;
+      let view = new DataView(buffer);
+
+      // Extraer valores (big endian)
+      microBitX = view.getInt16(0, false) + windowWidth / 2;
+      microBitY = view.getInt16(2, false) + windowHeight / 2;
+      microBitAState = view.getUint8(4) === 1;
+      microBitBState = view.getUint8(5) === 1;
+
+      updateButtonStates(microBitAState, microBitBState);
+    }
+    // --------------------------------------------------------
+
+```
+Estos fueron los cambios entre codigos 
+| Aspecto                 | Primer código                       | Segundo código                  |
+| ----------------------- | ----------------------------------- | ------------------------------- |
+| Variable `serialBuffer` | ✅ presente                          | ❌ no existe                  |
+| Lectura de datos        | Binaria con `readBytes`             | Texto CSV con `readUntil("\n")` |
+| Validación              | Usa header `0xAA` y checksum        | No hay validación               |
+| Parseo de datos         | `DataView` sobre bytes (big endian) | `split(",")` sobre texto        |
+
+
+
