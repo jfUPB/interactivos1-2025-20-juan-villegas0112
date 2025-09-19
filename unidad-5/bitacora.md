@@ -48,6 +48,8 @@ Si el botón B pasa de presionado(true) a no presionado(false) → se interpreta
 
 🧐🧪✍️ Captura el resultado del experimento anterior.
 
+<a name="struct.pack"></a>
+
 <img width="989" height="195" alt="image" src="https://github.com/user-attachments/assets/59d25dc8-851d-4408-b8ac-e0ababd9ecf8" />
 
 ¿Por qué se ve este resultado?
@@ -265,13 +267,16 @@ Estos fueron los cambios entre codigos
 
 ### Autoevaluacion 
 
-🧠 Criterio 1: profundidad de la indagación
+[Un captura de la depuración](#)
 
-Mi autoevaluación: me sitúo en el nivel Excelente (4.5 - 5.0) porque no solo busqué cómo hacer funcionar el código, sino que cuestioné el diseño mismo del protocolo: comparé el envío en ASCII vs binario, analicé por qué era necesario usar un header y un checksum, y reflexioné sobre cuándo podría ser preferible un protocolo menos eficiente pero más legible. Además, investigué la causa raíz de errores como los valores absurdamente altos de coordenadas y cómo estaban relacionados con la lectura incorrecta de bytes.
+***🧠 Criterio 1: profundidad de la indagación***
+
+Mi autoevaluación: me sitúo en el nivel Excelente (5.0) porque no solo busqué cómo hacer funcionar el código, sino que cuestioné el diseño mismo del protocolo: comparé el envío en ASCII vs binario, analicé por qué era necesario usar un header y un checksum, y reflexioné sobre cuándo podría ser preferible un protocolo menos eficiente pero más legible. Además, investigué la causa raíz de errores como los valores absurdamente altos de coordenadas y cómo estaban relacionados con la lectura incorrecta de bytes.
 
 Evidencias:
 
-En mi bitácora analicé por qué el uso de struct.pack('>2h2B') genera bytes crudos y cómo eso afecta la interpretación de los datos.
+[En mi bitácora analicé por qué el uso de struct.pack('>2h2B') genera bytes crudos y cómo eso afecta la interpretación de los datos.](#struct.pack)
+
 
 Me pregunté por qué aparecían símbolos extraños en la consola y no solo cómo quitarlos.
 
@@ -312,3 +317,4 @@ Expliqué que la comunicación serial es un flujo de bytes sin fronteras y que e
 Redacté con mis palabras qué hace cada byte en el formato >2h2B (x, y, a, b) y cómo el orden big endian afecta la lectura correcta.
 
 Añadí diagramas y tablas con la estructura del paquete, demostrando que entendí el protocolo como un sistema coherente, no solo líneas sueltas de código.
+
