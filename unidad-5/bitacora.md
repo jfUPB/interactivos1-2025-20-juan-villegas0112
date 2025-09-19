@@ -263,4 +263,52 @@ Estos fueron los cambios entre codigos
 | Parseo de datos         | `DataView` sobre bytes (big endian) | `split(",")` sobre texto        |
 
 
+### Autoevaluacion 
 
+🧠 Criterio 1: profundidad de la indagación
+
+Mi autoevaluación: me sitúo en el nivel Excelente (4.5 - 5.0) porque no solo busqué cómo hacer funcionar el código, sino que cuestioné el diseño mismo del protocolo: comparé el envío en ASCII vs binario, analicé por qué era necesario usar un header y un checksum, y reflexioné sobre cuándo podría ser preferible un protocolo menos eficiente pero más legible. Además, investigué la causa raíz de errores como los valores absurdamente altos de coordenadas y cómo estaban relacionados con la lectura incorrecta de bytes.
+
+Evidencias:
+
+En mi bitácora analicé por qué el uso de struct.pack('>2h2B') genera bytes crudos y cómo eso afecta la interpretación de los datos.
+
+Me pregunté por qué aparecían símbolos extraños en la consola y no solo cómo quitarlos.
+
+Reflexioné sobre las implicaciones de usar framing y checksum para garantizar la sincronización, en vez de solo solucionar el error inmediato.
+
+🧪 Criterio 2: calidad de la experimentación
+
+Mi autoevaluación: considero que mi nivel es Excelente (4.5 - 5.0) porque no me limité a ejecutar el código dado: diseñé experimentos para comprobar hipótesis específicas, como enviar valores negativos conocidos para verificar el orden de los bytes, y provoqué errores de checksum para confirmar que el sistema los detectaba y descartaba correctamente.
+
+Evidencias:
+
+Implementé un buffer (serialBuffer) para ensamblar paquetes completos de 8 bytes, lo que me permitió detectar paquetes corruptos y observar el fallo en tiempo real.
+
+Usé el monitor en modo HEX para verificar byte a byte la estructura del paquete (header, 2 shorts, 2 bytes, checksum).
+
+Registré capturas de consola donde se veían los paquetes descartados por error de checksum, comprobando que mi solución funcionaba.
+
+🧩 Criterio 3: calidad del análisis y la reflexión
+
+Mi autoevaluación: mi nivel aquí es Excelente (4.5 - 5.0) porque no solo describí los errores, sino que expliqué por qué ocurrían a nivel de bytes y cómo mis soluciones los evitaban. Relacioné teoría y práctica: del concepto de flujo de datos serial asíncrono, pasé a implementar una estrategia de framing que corrigió la desincronización.
+
+Evidencias:
+
+Analicé cómo la falta de delimitadores es segura solo si se conoce el tamaño fijo de los paquetes, y cómo el header 0xAA evita lecturas desfasadas.
+
+Conecté los valores absurdos (ej. 29541) con una lectura desalineada del buffer, demostrando comprensión del problema.
+
+Reflexioné sobre los trade-offs: más eficiencia binaria vs más robustez en ASCII, lo cual incluí como conclusión en mis notas.
+
+⚙️ Criterio 4: apropiación y articulación de conceptos
+
+Mi autoevaluación: demuestro mi apropiación en el nivel Excelente (4.5 - 5.0) porque puedo explicar con mis propias palabras cada parte del sistema: qué hace el header, cómo se calcula y valida el checksum, cómo struct.pack transforma enteros en bytes, y cómo DataView en p5.js interpreta esos bytes. No memoricé definiciones: construí una comprensión integrada y funcional.
+
+Evidencias:
+
+Expliqué que la comunicación serial es un flujo de bytes sin fronteras y que el protocolo actúa como un “marco” que impone orden.
+
+Redacté con mis palabras qué hace cada byte en el formato >2h2B (x, y, a, b) y cómo el orden big endian afecta la lectura correcta.
+
+Añadí diagramas y tablas con la estructura del paquete, demostrando que entendí el protocolo como un sistema coherente, no solo líneas sueltas de código.
