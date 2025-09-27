@@ -190,7 +190,105 @@ Aplicaciones donde se usa comunicación en tiempo real:
 - Aplicaciones colaborativas como Google Docs, donde ves lo que otros escriben en tiempo real.
 
 
+## Actividad 03
+
+🧐🧪✍️ Experimenta
+
+***Intenta acceder a http://localhost:3000/page1. ¿Funciona?***
+
+No funcionó, porque la ruta ya no existe.
+
+****Ahora intenta acceder a http://localhost:3000/pagina_uno. ¿Funciona?****
+
+Funcionó, porque coincide con la nueva ruta definida en el servidor.
+
+****¿Qué te dice esto sobre cómo el servidor asocia URLs con respuestas? Restaura el código.****
+
+Esto confirma que el servidor funciona como un “mapa” de rutas: cada URL debe estar definida explícitamente en el código para que sea válida.
+
+
+🧐🧪✍️Experimenta
+
+
+***Abre http://localhost:3000/page1 en una pestaña. Observa la terminal del servidor. ¿Qué mensaje ves? Anota el ID.***
+
+``` A user connected - ID: Bqv_vGEsW0ky006GAAAD```
+
+***Abre http://localhost:3000/page2 en OTRA pestaña. Observa la terminal. ¿Qué mensaje ves? ¿El ID es diferente?***
+
+```A user connected - ID: sU5_ERGIKcqbv39ZAAAB```
+
+***Cierra la pestaña de page1. Observa la terminal. ¿Qué mensaje ves? ¿Coincide el ID con el que anotaste?***
+
+```User disconnected - ID: Bqv_vGEsW0ky006GAAAD, si coincide con el id```
+
+
+🧐🧪✍️Experimenta
+
+***Mueve la ventana de page1. Observa la terminal del servidor. ¿Qué evento se registra (win1update o win2update)? ¿Qué datos (Data:) ves?***
+
+```Received win1update from ID: NGv9dd_yaSjt5D56AAAC Data: { x: 225, y: 299, width: 500, height: 291 }```
+
+- El evento es win1update y los datos (Data:) corresponden a la posición y tamaño de la ventana de Page1 (x, y, width, height).
+
+Cada vez que se mueve la ventana, aparece un nuevo win1update con las coordenadas actualizadas (x, y).
+
+***Mueve la ventana de page2. Observa la terminal. ¿Qué evento se registra ahora? ¿Qué datos ves?***
+
+```Received win2update from ID: jYsl1CFOdheZFlnCAAAD Data: { x: 1313, y: 252, width: 500, height: 354 }```
+
+Experimento clave: cambia socket.broadcast.emit(‘getdata’, page1); por socket.emit(‘getdata’, page1); (quitando broadcast). Reinicia el servidor, abre ambas páginas. Mueve page1. ¿Se actualiza la visualización en page2? ¿Por qué sí o por qué no? (Pista: ¿A quién le envía el mensaje socket.emit?). Restaura el código a broadcast.emit.
+
+ Page2 no se actualiza, porque ```socket.emit(...)``` envía el mensaje solo al cliente que originó la acción (en este caso page1), mientras que ```socket.broadcast.emit(...)``` lo envía a todos los demás clientes conectados excepto al emisor.
+Entonces, al quitar broadcast, el evento no llega a page2.
+
+🧐🧪✍️ Experimenta
+
+***Inicia el servidor. ¿Qué mensaje ves en la consola? ¿En qué puerto dice que está escuchando?***
+
+```Server is listening on http://localhost:3001```
 
 
 
+***Intenta abrir http://localhost:3000/page1. ¿Funciona?***
 
+No funciona
+
+
+***Intenta abrir http://localhost:3001/page1. ¿Funciona?***
+
+Si funciona.
+```
+A user connected - ID: FduPChtBtW22FqjeAAAB
+Received win1update from ID: FduPChtBtW22FqjeAAAB Data: { x: 0, y: 0, width: 1920, height: 945 }
+```
+
+
+***¿Qué aprendiste sobre la variable port y la función listen? Restaura el puerto a 3000.***
+
+La variable port define dónde escucha el servidor. server.listen(port) abre la conexión en ese número de puerto; si lo cambias, las URLs deben usar el nuevo puerto.
+
+
+## Actividad 04
+
+🧐🧪✍️ Experimenta
+
+
+***Refresca la página page2.html. Observa la consola del navegador. ¿Ves algún error relacionado con la conexión? ¿Qué indica?***
+
+<img width="522" height="47" alt="image" src="https://github.com/user-attachments/assets/55de7944-595b-42a6-95f5-463b70733f79" />
+
+***Vuelve a iniciar el servidor y refresca la página. ¿Desaparecen los errores?***
+
+Sí desaparecen.
+
+<img width="517" height="20" alt="image" src="https://github.com/user-attachments/assets/4f2c7b57-e95f-4519-a3fb-1829207f7354" />
+
+🧐🧪✍️ Experimenta
+
+<img width="493" height="203" alt="image" src="https://github.com/user-attachments/assets/f496fe68-9c7e-4db2-8d74-58154a78d87f" />
+
+
+***¿Qué pasó? ¿Por qué?***
+
+Al inicio no se sincronizaron las páginas porque al comentar el socket.emit('win2update') dentro del connect, page2 ya no avisó de su estado inicial al servidor. La sincronización solo empezó cuando moví page2, ya que en ese momento se emitió manualmente un win2update con los datos actualizados. Porque la línea comentada era la que enviaba la señal inicial de identificación y estado al servidor. Sin esa señal, el servidor no sabía nada de page2 ni de sus datos, por eso page1 no recibió información al inicio. Solo cuando page2 cambió su posición se generó un nuevo win2update que activó el flujo de sincronización.
