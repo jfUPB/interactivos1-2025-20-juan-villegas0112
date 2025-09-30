@@ -3,7 +3,7 @@
 
 ## Actividad 01
 
-🧐🧪✍️ Reporte
+***🧐🧪✍️ Reporte***
 
 ***¿Qué ocurrió en la terminal cuando ejecutaste npm install? ¿Cuál crees que es su propósito?***
 
@@ -36,7 +36,7 @@ Se generan unos circulos rojos que van conectados mediante un cable, si uno muev
 
 ## Actividad 02
 
-🧐✍️ Reporte
+***🧐✍️ Reporte***
 
 ***Piensa en cómo te conectas a Internet en casa o en la Universidad. ¿Usas Wi-Fi? ¿Un cable de red? Eso es simplemente tu “rampa de acceso” a la gran red de carreteras. ¿Qué pasaría si esa rampa se corta? Anota tus ideas.***
 
@@ -108,7 +108,7 @@ Al ingresar a https://futbol-11.com/
 
 Esto indica que la página principal requiere que se tenga JavaScript habilitado para funcionar correctamente.
 
-🧐✍️ Reporte
+***🧐✍️ Reporte***
 
 Compara HTTP con los protocolos seriales que usaste.
 
@@ -127,7 +127,7 @@ HTTP necesita esta complejidad porque la web no se limita a transmitir datos cru
 En conclusión, mientras que los protocolos seriales son como un “idioma sencillo” entre dos dispositivos cercanos, HTTP es un lenguaje mucho más completo y estandarizado que permite que millones de computadoras en el mundo puedan comunicarse de manera efectiva.
 
 
-🧐✍️ Reporte
+***🧐✍️ Reporte***
 
 ***Piensa en una página web simple, como un formulario de login.***
 
@@ -143,7 +143,7 @@ Se encarga de darle la apariencia visual al formulario. Aquí entran cosas como 
 
 Aporta la interactividad. En el login, sería el código que revisa si los campos están vacíos antes de permitir enviar el formulario, o el que muestra un mensaje en pantalla como “Contraseña incorrecta” sin necesidad de recargar toda la página. También podría usarse para validar en tiempo real que el correo escrito tenga un formato válido.
 
-🧐✍️ Reporte
+***🧐✍️ Reporte***
 
 ***Compara el bucle draw() de p5.js con este modelo de “esperar a que algo pase y reaccionar”.***
 
@@ -160,7 +160,7 @@ Aporta la interactividad. En el login, sería el código que revisa si los campo
 
 Definitivamente no. Sería un gasto enorme de procesamiento y memoria para el navegador, además de que haría más lenta la experiencia del usuario. En una página web, la mayor parte del tiempo los elementos son estáticos (texto, imágenes, botones) y solo cambian cuando el usuario interactúa. Por eso el modelo basado en eventos es mucho más apropiado: solo se actualiza lo que cambia y en el momento justo.
 
-🧐✍️ Reporte
+***🧐✍️ Reporte***
 
 ***¿Por qué crees que podría ser útil usar JavaScript tanto en el cliente (navegador) como en el servidor? ¿Se te ocurre alguna ventaja para los desarrolladores?***
 
@@ -173,7 +173,7 @@ Aprendizaje más simple: basta con aprender bien un solo lenguaje para poder tra
 Reutilización de código: funciones, validaciones o estructuras se pueden compartir entre cliente y servidor, evitando duplicar trabajo.
 
 
-🧐✍️ Reporte
+***🧐✍️ Reporte***
 
 ***Resume con tus propias palabras la diferencia fundamental entre una comunicación HTTP tradicional y una comunicación usando WebSockets/Socket.IO. ¿En qué tipo de aplicaciones has visto o podrías imaginar que se usa esta comunicación en tiempo real?***
 
@@ -192,7 +192,7 @@ Aplicaciones donde se usa comunicación en tiempo real:
 
 ## Actividad 03
 
-🧐🧪✍️ Experimenta
+***🧐🧪✍️ Experimenta***
 
 ***Intenta acceder a http://localhost:3000/page1. ¿Funciona?***
 
@@ -207,7 +207,7 @@ Funcionó, porque coincide con la nueva ruta definida en el servidor.
 Esto confirma que el servidor funciona como un “mapa” de rutas: cada URL debe estar definida explícitamente en el código para que sea válida.
 
 
-🧐🧪✍️Experimenta
+***🧐🧪✍️Experimenta***
 
 
 ***Abre http://localhost:3000/page1 en una pestaña. Observa la terminal del servidor. ¿Qué mensaje ves? Anota el ID.***
@@ -223,7 +223,7 @@ Esto confirma que el servidor funciona como un “mapa” de rutas: cada URL deb
 ```User disconnected - ID: Bqv_vGEsW0ky006GAAAD, si coincide con el id```
 
 
-🧐🧪✍️Experimenta
+***🧐🧪✍️Experimenta***
 
 ***Mueve la ventana de page1. Observa la terminal del servidor. ¿Qué evento se registra (win1update o win2update)? ¿Qué datos (Data:) ves?***
 
@@ -242,7 +242,7 @@ Experimento clave: cambia socket.broadcast.emit(‘getdata’, page1); por socke
  Page2 no se actualiza, porque ```socket.emit(...)``` envía el mensaje solo al cliente que originó la acción (en este caso page1), mientras que ```socket.broadcast.emit(...)``` lo envía a todos los demás clientes conectados excepto al emisor.
 Entonces, al quitar broadcast, el evento no llega a page2.
 
-🧐🧪✍️ Experimenta
+***🧐🧪✍️ Experimenta***
 
 ***Inicia el servidor. ¿Qué mensaje ves en la consola? ¿En qué puerto dice que está escuchando?***
 
@@ -271,7 +271,7 @@ La variable port define dónde escucha el servidor. server.listen(port) abre la 
 
 ## Actividad 04
 
-🧐🧪✍️ Experimenta
+***🧐🧪✍️ Experimenta***
 
 
 ***Refresca la página page2.html. Observa la consola del navegador. ¿Ves algún error relacionado con la conexión? ¿Qué indica?***
@@ -292,3 +292,139 @@ Sí desaparecen.
 ***¿Qué pasó? ¿Por qué?***
 
 Al inicio no se sincronizaron las páginas porque al comentar el socket.emit('win2update') dentro del connect, page2 ya no avisó de su estado inicial al servidor. La sincronización solo empezó cuando moví page2, ya que en ese momento se emitió manualmente un win2update con los datos actualizados. Porque la línea comentada era la que enviaba la señal inicial de identificación y estado al servidor. Sin esa señal, el servidor no sabía nada de page2 ni de sus datos, por eso page1 no recibió información al inicio. Solo cuando page2 cambió su posición se generó un nuevo win2update que activó el flujo de sincronización.
+
+***🧐🧪✍️ Experimenta***
+
+***Asegúrate de tener este console.log en page2.js.***
+
+***Abre ambas páginas.***
+
+***Mueve la ventana de page1. Observa la consola del navegador de page2. ¿Qué datos muestra?***
+
+<img width="521" height="139" alt="image" src="https://github.com/user-attachments/assets/d8760827-51de-414e-b709-452ab135183f" />
+
+Las coordenadas y el tamaño de la pestaña de page1
+
+***Mueve la ventana de page2. Observa la consola de page1. ¿Qué pasa? ¿Por qué?***
+
+Cuando muevo la ventana de page2, normalmente no veo que la consola de page1 muestre datos nuevos o cambios. Esto ocurre porque en el código original, solo la ventana page1 está enviando sus datos a la otra ventana (page2)
+
+
+
+***🧐🧪✍️Experimenta***
+
+***Observa checkWindowPosition() en page2.js y modifica el código del if para comprobar si el código dentreo de este se ejecuta.***
+
+``` js
+ if (currentPageData.x !== previousPageData.x || currentPageData.y !== previousPageData.y || 
+    currentPageData.width !== previousPageData.width || currentPageData.height !== previousPageData.height) {
+
+    console.log('Cambio detectado en ventana:', currentPageData);
+
+    point2 = [currentPageData.width / 2, currentPageData.height / 2];
+    socket.emit('win2update', currentPageData, socket.id);
+    previousPageData = currentPageData; 
+```
+
+***Mueve cada ventana y observa las consolas.***
+***¿Qué puedes concluir y por qué?***
+
+
+<img width="517" height="53" alt="image" src="https://github.com/user-attachments/assets/c6757bbe-bb38-4356-ba52-c9d912570740" />
+
+
+Al ejecutar el código y mover la ventana, la consola del navegador me mostró el mensaje "Cambio detectado en ventana:" seguido de los datos de posición y tamaño.
+Esto me confirma que la función checkWindowPosition() sí se está ejecutando correctamente dentro del ciclo draw() y que está evaluando las condiciones del if para detectar cambios.
+También confirma que el socket está funcionando porque el estado SYNCED ya se alcanzó y los datos se están enviando al servidor.
+
+Por lo tanto, puedo concluir que:
+
+La detección de movimiento de ventana está bien implementada,
+
+El cliente está emitiendo correctamente los datos,
+
+Y el flujo de sincronización está funcionando como se espera.
+
+***🧐🧪✍️ Experimenta***
+
+***Cambia el background(220) para que dependa de la distancia entre las ventanas. Puedes calcular la magnitud del resultingVector usando let distancia = resultingVector.mag(); y luego usa map() para convertir esa distancia a un valor de gris o color. background(map(distancia, 0, 1000, 255, 0)); (ajusta el rango 0-1000 según sea necesario).***
+
+
+<img width="1082" height="410" alt="image" src="https://github.com/user-attachments/assets/83b8c6fa-a044-4df4-9106-27265a23082c" />
+
+
+<img width="1370" height="399" alt="image" src="https://github.com/user-attachments/assets/f739e6ca-6e08-4ecc-bc04-fffeca189077" />
+
+
+``` js
+function draw() 
+{
+    if (!isConnected) {
+        background(220);
+        showStatus('Conectando al servidor...', color(255, 165, 0));
+        return;
+    }
+
+    if (!hasRemoteData) {
+        background(220);
+        showStatus('Esperando conexión de la otra ventana...', color(255, 165, 0));
+        return;
+    }
+
+    if (!isFullySynced) {
+        background(220);
+        showStatus('Sincronizando datos...', color(255, 165, 0));
+        return;
+    }
+
+    
+    let vector1 = createVector(currentPageData.x, currentPageData.y);
+    let vector2 = createVector(remotePageData.x, remotePageData.y);
+    let resultingVector = p5.Vector.sub(vector2, vector1);
+    let distancia = resultingVector.mag();
+
+   
+    let fondo = map(distancia, 0, 1000, 255, 0); 
+    background(fondo); 
+
+
+    drawCircle(point2[0], point2[1]);
+    checkWindowPosition();
+
+    stroke(50);
+    strokeWeight(20);
+    drawCircle(resultingVector.x + remotePageData.width / 2, resultingVector.y + remotePageData.height / 2);
+    line(point2[0], point2[1], resultingVector.x + remotePageData.width / 2, resultingVector.y + remotePageData.height / 2);
+}
+
+```
+***Inventa otra modificación creativa.***
+
+<img width="1047" height="403" alt="image" src="https://github.com/user-attachments/assets/5550fce2-1beb-4dcf-ba62-cf95e15549f0" />
+
+
+<img width="1830" height="408" alt="image" src="https://github.com/user-attachments/assets/535eab69-2ff2-4d15-aff8-b95845af0101" />
+
+
+```js
+function drawCircle(x, y) {
+   
+    let vector1 = createVector(currentPageData.x, currentPageData.y);
+    let vector2 = createVector(remotePageData.x, remotePageData.y);
+    let distancia = p5.Vector.sub(vector2, vector1).mag();
+
+    
+    let tam = map(distancia, 0, 1000, 50, 200);
+
+    fill(255, 0, 0);
+    ellipse(x, y, tam, tam);
+}
+```
+## Actividad 05
+
+🧐🧪✍️ En tu bitácora
+
+Explica tu idea y realiza algunos bocetos.
+Implementa tu idea.
+Incluye todos los códigos (servidor y clientes) en tu bitácora.
+
