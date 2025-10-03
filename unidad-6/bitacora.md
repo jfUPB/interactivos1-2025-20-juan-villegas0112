@@ -424,7 +424,34 @@ function drawCircle(x, y) {
 
 🧐🧪✍️ En tu bitácora
 
-Explica tu idea y realiza algunos bocetos.
-Implementa tu idea.
-Incluye todos los códigos (servidor y clientes) en tu bitácora.
+***Explica tu idea y realiza algunos bocetos.***
+
+Semáforo Interactivo en Tiempo Real: Una aplicación donde dos usuarios pueden controlar y observar juntos el estado de un semáforo.
+
+Funcionamiento:
+
+- El cliente A hace clic en un botón (“verde”, “amarillo”, “rojo”).
+
+- El servidor recibe el cambio y lo retransmite a todos los clientes.
+
+- El cliente B ve que el semáforo cambió de color en su pantalla al mismo tiempo.
+
+- Ambos siempre ven el mismo estado del semáforo.
+
+<img width="958" height="432" alt="image" src="https://github.com/user-attachments/assets/dedcadb1-70bb-4a49-9454-eceaaf532e9a" />
+
+***Implementa tu idea.***
+
+
+
+***Incluye todos los códigos (servidor y clientes) en tu bitácora.***
+
+
+## Autoevaluacion
+
+4: realicé 4 actividades completas y la autoevaluación.
+
+
+A pesar de que me faltó terminar una de las actividades, considero que merezco una nota de 4 porque en las demás evidencias realicé un trabajo completo, con explicaciones detalladas, pruebas adicionales y aportes creativos que muestran un entendimiento sólido de los temas. El esfuerzo y la dedicación en la mayor parte del proceso reflejan compromiso con el aprendizaje y un desempeño que cumple con los objetivos principales de la unidad.
+
 
