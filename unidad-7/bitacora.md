@@ -86,3 +86,12 @@ El mensaje sería recibido por los dos computadores de escritorio, pero no por e
 Los console.log del servidor sirven para ver lo que está pasando “por detrás”. Muestran cuándo un cliente se conecta o se desconecta, cuándo llega un mensaje desde algún dispositivo y qué datos trae (como las coordenadas del toque). Esto ayuda mucho para verificar que todo está funcionando bien, entender el flujo de comunicación y detectar errores o desconexiones en tiempo real.
 
 
+## Actividad 04
+
+***🧐🧪✍️ Reporta en tu bitácora***
+
+**Realiza un diagrama donde muestres el flujo completo de datos y eventos entre los tres componentes: móvil, servidor y escritorio. Puedes ilustrar con un ejemplo de coordenadas táctiles (x, y) y cómo viajan a través del sistema.**
+
+<img width="426" height="675" alt="image" src="https://github.com/user-attachments/assets/abd426dd-509b-4bc6-a24f-5b53ed115def" />
+
+
