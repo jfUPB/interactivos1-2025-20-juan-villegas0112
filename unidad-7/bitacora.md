@@ -94,4 +94,19 @@ Los console.log del servidor sirven para ver lo que está pasando “por detrás
 
 <img width="426" height="675" alt="image" src="https://github.com/user-attachments/assets/abd426dd-509b-4bc6-a24f-5b53ed115def" />
 
+## Apply 
+
+1. Mi idea es usar la canción “See You Again” de Tyler, The Creator, inspirándome en las abejas que aparecen en su álbum. Quiero crear un enjambre de abejas que se muevan al ritmo de la música, cambiando de color y dirección según el sonido. Durante el coro, las abejas se desordenan y vuelan con más energía.
+
+El touch del móvil servirá para guiarlas, como si el dedo fuera una flor que las atrae. Usaré una clase Abeja con update() y draw() para manejar cada una, y la conexión entre el móvil y el escritorio será con Node.js y p5.js, para que la animación reaccione en tiempo real.
+
+
+<img width="1193" height="1200" alt="image" src="https://github.com/user-attachments/assets/0544de60-cefe-418e-8253-f30dc71bdf98" />
+
+## Evidencias 🗂️
+
+***Mi nota es 3,7***
+
+Considero que mi trabajo merece una nota de 3,7 porque realicé las cuatro actividades completas, además de incluir un numeral del apply, demostrando un buen nivel de comprensión y aplicación de los temas. Cada parte del trabajo está bien desarrollada, con ideas claras, coherentes y creativas, mostrando dedicación y cumplimiento con todos los requerimientos planteados.
+
 
