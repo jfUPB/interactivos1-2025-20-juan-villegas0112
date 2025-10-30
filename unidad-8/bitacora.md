@@ -40,6 +40,42 @@ Cada que se presione la pantalla del celular aparecera una fruta y con los boton
 <img width="414" height="568" alt="image" src="https://github.com/user-attachments/assets/745e5c9f-35f7-43a8-a61c-a6a1ea639fac" />
 
 
+## APPly
+
+***1. Documenta todo el proceso de construcción.***
+
+-Lo primero para empezar con el proyecto fue buscar en unidades pasadas el duncionamiento del micro:bit, para repasar y verificarcomo hacer que fucione correctamente.
+
+- Me di cuenta que era mas sencillo si en vez de hacer que aparecieran imagenes de frutas era mejor usar emojis porq ya están implementados y no toca agregarlos.
+
+- Ahora busue el como descargar la cancion y ver como funciona a la hora de crear la pagina. 
+
+- Haciendo varias pruebas y viendo en la consola del desktop ya de forma online, no me deja iniciar el programa por la utilizacion de audio y no encuentro la manera de arreglarlo. 
+
+
+
+
+***2. Incluye todos los códigos: servidor, cliente móvil, cliente de escritorio y micro:bit.***
+
+micro:bit 
+
+```py
+
+from microbit import *
+import bluetooth
+import uart
+
+uart.init(baudrate=115200)
+
+while True:
+    if button_a.was_pressed():
+        uart.write("A\n")
+    if button_b.was_pressed():
+        uart.write("B\n")
+    sleep(100)
+```
+
+
 
 
 
